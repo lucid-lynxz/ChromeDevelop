@@ -1,0 +1,39 @@
+{
+    "manifest_version": 2,
+    // 显示在 chrome-settings-extensions中的信息
+    "name": "my_extension",
+    "version": "1.0",
+    "description": "学习js,学习chrome插件制作demo",
+    "icons": {
+        "16": "image/chrome.png"
+    },
+    "browser_action": {
+        "default_icon": {
+            "16": "image/chrome.png"
+        },
+        "default_title": "Chrome扩展demo", //鼠标悬浮时显示的提示名称
+        "default_popup": "popup.html" // 点击图标时弹出的页面
+    },
+    // 常驻后台
+    "background": {
+        // 指定后台运行的脚本
+        // 右键菜单功能选项也可以在里面添加
+        "scripts": [
+            "js/background.js"
+        ]
+    },
+    "permissions": [ //权限限制
+        //允许访问的网站
+        "http://www.ip138.com/",
+        "http://flash.weather.com.cn/",
+        "https://www.baidu.com/",
+        "http://pv.sohu.com/",
+        // 将扩展加入到右键菜单中,需要添加 `contextMenus` 权限
+        // 同事还要设置 `icons` 域生命16像素尺寸的图标，右键菜单才会显示出扩展的图标
+        "contextMenus",
+        //　添加桌面提醒
+        "notifications",
+        // 操作cookies,需要添加权限以及可操作的域(不限制: `<all_urls>`),此处会允许上面生命的几个域数据
+        "cookies"
+    ]
+}
