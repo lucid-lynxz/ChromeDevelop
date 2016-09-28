@@ -198,14 +198,14 @@ chrome.notifications.onClosed.addListener(function () {
 ```
 
 ## [申请权限](https://developer.chrome.com/extensions/permissions)
-确定哪些权限为可选权限后,在 `manifest.json` 中声明:
+确定哪些权限为可选权限后,在 `manifest.json` 中声明,可选权限会弹出确认框让用户确认:
 ```manifest.json
 "optional_permissions": [ "tabs", "http://www.jianshu.com/" ],
 ```
 > 你能声明的optional权限有:
 host permissions,background'bookmarks,clipboardRead,clipboardWrite,contentSettings,contextMenus,cookies,debugger,history,idle,management,notifications,pageCapture,tabs,topSites,webNavigation,webRequest,webRequestBlocking
 
-然后在用户手势动作事件中动态申请权限(会弹出确认框):
+然后在用户手势动作事件中动态申请权限:
 ```js
 $('#click_div').click(function () {
     chrome.permissions.request({
@@ -217,7 +217,11 @@ $('#click_div').click(function () {
     });
 });
 
+// 补充
+chrome.permissions.contains(targetPermisson,callback);// 判断是否拥有某权限
+chrome.permissions.remove(targetPermisson,callback);// 删除权限
 ```
+
 
 
 # 相关名词汇总及资料推荐

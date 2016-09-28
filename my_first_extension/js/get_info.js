@@ -30,16 +30,38 @@ $(document).ready(function () {
         $('#weather_div').text("厦门天气: " + xmlDoc.getElementsByTagName('city')[0].getAttribute('windState'));
     });
 
+    var targetPermission = {
+        permissions: ['tabs'],
+        origins: ['http://www.jianshu.com/']
+    };
     // 动态申请权限
     $('#ip_div').click(function () {
-        chrome.permissions.request({
-            permissions: ['tabs'],
-            origins: ['http://www.jianshu.com/']
-        }, function (granted) {
-            // The callback argument will be true if the user granted the permissions.
-            alert('result :  ' + granted);
+        chrome.permissions.contains(targetPermission, function (result) {
+            if (result) {
+                // The extension has the permissions.
+                alert("您已获得过该权限,不需要再申请,将进行移除...");
+                removePermission();
+            } else {
+                // The extension doesn't have the permissions.
+                requestPermission();
+            }
         });
     });
+
+    // 申请权限
+    function requestPermission() {
+        chrome.permissions.request(targetPermission, function (granted) {
+            alert('申请权限时候成功 :  ' + granted);
+        });
+    }
+
+
+    // 移除权限
+    function removePermission() {
+        chrome.permissions.remove(targetPermission, function (removed) {
+            alert("移除权限是否成功: " + removed);
+        });
+    }
 
 });
 
