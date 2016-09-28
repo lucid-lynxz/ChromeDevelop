@@ -38,6 +38,6 @@
         //　添加桌面提醒
         "notifications",
         // 操作cookies,需要添加权限以及可操作的域(不限制: `<all_urls>`),此处会允许上面生命的几个域数据
-        "cookies"
+        "cookies"        
     ]
 }

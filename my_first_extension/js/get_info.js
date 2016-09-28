@@ -63,6 +63,15 @@ $(document).ready(function () {
         });
     }
 
+    localStorage.hello = "nice to meet you"
+    // 测试读写本地数据
+    $('#weather_div').click(function () {
+        alert('click ' + localStorage.hello);
+        chrome.storage.StorageArea.get({ 'today': 'not data' }, function (result) {
+            alert("getValue: " + result);
+        });
+    });
+
 });
 
 
