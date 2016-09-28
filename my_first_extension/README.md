@@ -197,7 +197,30 @@ chrome.notifications.onClosed.addListener(function () {
 });
 ```
 
-### 相关名词汇总及资料推荐
+## [申请权限](https://developer.chrome.com/extensions/permissions)
+确定哪些权限为可选权限后,在 `manifest.json` 中声明:
+```manifest.json
+"optional_permissions": [ "tabs", "http://www.jianshu.com/" ],
+```
+> 你能声明的optional权限有:
+host permissions,background'bookmarks,clipboardRead,clipboardWrite,contentSettings,contextMenus,cookies,debugger,history,idle,management,notifications,pageCapture,tabs,topSites,webNavigation,webRequest,webRequestBlocking
+
+然后在用户手势动作事件中动态申请权限(会弹出确认框):
+```js
+$('#click_div').click(function () {
+    chrome.permissions.request({
+        permissions: ['tabs'],
+        origins: ['http://www.jianshu.com/']
+    }, function (granted) {
+        // The callback argument will be true if the user granted the permissions.
+        alert('result :  ' + granted);
+    });
+});
+
+```
+
+
+# 相关名词汇总及资料推荐
 [manifest.json](https://developer.chrome.com/extensions/manifest)   
 [browserAction](https://developer.chrome.com/extensions/browserAction)
 [pageAction](https://developer.chrome.com/extensions/pageAction)
