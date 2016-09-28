@@ -1,4 +1,4 @@
-先上一张效果图:
+先上一张效果图:<br>
 ![extension_effect.gif](https://raw.githubusercontent.com/lucid-lynxz/markdownPhotos/master/chrome_extension/effect.gif)
 
 # 结构
@@ -7,17 +7,17 @@
 ## 几个概念
 ![extension_effect.gif](https://raw.githubusercontent.com/lucid-lynxz/markdownPhotos/master/chrome_extension/effect.png)
 
-从上图可以看出围绕在extension中的几个可见UI元素:
-`icon` : extension的默认图标
-`badge` : 标记,可以显示最多4个字符的信息,类似于手机软件中的未读消息数目
-`toolTip` :　右图中当鼠标悬浮在 icon 上方时弹出的提示信息
-`popup` : 用户点击 icon 时,extension 展示给用户看的页面
+从上图可以看出围绕在extension中的几个可见UI元素:<br>
+`icon` : extension的默认图标<br>
+`badge` : 标记,可以显示最多4个字符的信息,类似于手机软件中的未读消息数目<br>
+`toolTip` :　右图中当鼠标悬浮在 icon 上方时弹出的提示信息<br>
+`popup` : 用户点击 icon 时,extension 展示给用户看的页面<br>
 
 一个扩展需要这么几个文件:
 manifest.json , popup.html , background.js, icon.png
 
 ## [manifest.json](https://developer.chrome.com/extensions/manifest)
-清单文件,用于声明一些元数据的json格式文件,可以包含扩展名,描述,版本号,权限等,
+清单文件,用于声明一些元数据的json格式文件,可以包含扩展名,描述,版本号,权限等;<br>
 另外, `manifest.json` 还指明了两个主要文件: `default_popup` 和 `background -> scripts`:
 ```manifest.json
 {
@@ -116,8 +116,8 @@ chrome.browserAction.setBadgeBackgroundColor({ color: '#0000ff' });
 chrome.browserAction.setBadgeText({ text: "999+" });
 ```
 # 加载extension程序
-1. 在chrome地址栏中输入: `chrome://extensions/` 或者通过 `settings - extensions` 打开设置页面;
-2. 启用 `developer mode` , 并通过 `load unpacked extension...` 来加载本地项目文件夹就可以了;
+1.在chrome地址栏中输入: `chrome://extensions/` 或者通过 `settings - extensions` 打开设置页面;
+2.启用 `developer mode` , 并通过 `load unpacked extension...` 来加载本地项目文件夹就可以了;
 ![setting_extension.png](https://raw.githubusercontent.com/lucid-lynxz/markdownPhotos/master/chrome_extension/setting_extension.png)
 
 # 其他操作
@@ -125,7 +125,7 @@ chrome.browserAction.setBadgeText({ text: "999+" });
 
 ## 创建右键菜单选项
 ![content_menu.png](https://raw.githubusercontent.com/lucid-lynxz/markdownPhotos/master/chrome_extension/content_menu.png)
-1. 在 `manifest.json` 中声明权限和icon图标
+1.在 `manifest.json` 中声明权限和icon图标
 ```manifest.json
 {
     "icons": {
@@ -137,7 +137,7 @@ chrome.browserAction.setBadgeText({ text: "999+" });
 
 }
 ```
-2. 在 `background.script` 指定的脚本中创建menucontent选项
+2.在 `background.script` 指定的脚本中创建menucontent选项
 ```js
 var link = chrome.contextMenus.create({
     "title": "您选中的是一串文字,点击给出提醒", // 右键菜单显示信息
@@ -153,13 +153,13 @@ function genericOnClick(info, tab) {
 ## 创建右下角通知栏
 ![notification.png](https://raw.githubusercontent.com/lucid-lynxz/markdownPhotos/master/chrome_extension/notification.gif)
 
-1. 在 `manifest.json` 中生命权限
+1.在 `manifest.json` 中生命权限
 ```json
   "permissions": [ 
         "notifications"
     ]
 ```
-2. 在 `background.script` 指定的脚本中设置notificationId以及options:
+2.在 `background.script` 指定的脚本中设置notificationId以及options:
 ```js
 var myNotificationId = "100";
 function showNotification() {
@@ -178,7 +178,7 @@ function showNotification() {
     chrome.notifications.create(myNotificationId, opt, function (id) { console.log("notifacition created ,id : " + id); })
 }
 ```
-3. 设置按钮点击事件
+3.设置按钮点击事件
 ```js
 chrome.notifications.onButtonClicked.addListener(function (notifId, btnIdx) {
     if (notifId === myNotificationId) {
@@ -190,7 +190,7 @@ chrome.notifications.onButtonClicked.addListener(function (notifId, btnIdx) {
     }
 });
 ```
-4. 设置通知框消失监听事件
+4.设置通知框消失监听事件
 ```js
 chrome.notifications.onClosed.addListener(function () {
     console.log("通知栏已关闭");

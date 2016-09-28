@@ -22,6 +22,7 @@
             "js/background.js"
         ]
     },
+    //可选权限,需要在用户事件(比如click)中进行动态申请
     "optional_permissions": [
         "tabs",
         "http://www.jianshu.com/"
